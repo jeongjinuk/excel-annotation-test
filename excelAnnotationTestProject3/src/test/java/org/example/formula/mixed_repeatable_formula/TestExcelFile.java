@@ -1,15 +1,15 @@
-package org.example.formula;
+package org.example.formula.mixed_repeatable_formula;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.example.excel.SXXFSExcelFile;
 
 import java.util.List;
 
-public class SumTestExcelFile<T> extends SXXFSExcelFile<T> {
+public class TestExcelFile<T> extends SXXFSExcelFile<T> {
     private static final int ROW_START_INDEX = 0;
-    private static int currentRowIndex = ROW_START_INDEX;
+    private static int currentRowIndex = ROW_START_INDEX + 1;
 
-    public SumTestExcelFile(List<T> data, Class<?> clazz) {
+    public TestExcelFile(List<T> data, Class<?> clazz) {
         super(data, clazz);
     }
     @Override
@@ -17,8 +17,8 @@ public class SumTestExcelFile<T> extends SXXFSExcelFile<T> {
         Sheet sheet = workbook.createSheet();
         renderHeader(sheet, ROW_START_INDEX);
         for (T t : data) {
-            renderBody(sheet, ++currentRowIndex, t);
+            renderBody(sheet, currentRowIndex++, t);
         }
-        renderFormula(sheet, ++currentRowIndex);
+        renderFormula(sheet, 0, data);
     }
 }

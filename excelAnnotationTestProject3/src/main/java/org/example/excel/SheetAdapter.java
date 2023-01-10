@@ -10,12 +10,11 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class AdapterSheet {
+public class SheetAdapter {
     private Sheet sheet;
-    public AdapterSheet(Sheet sheet) {
+    public SheetAdapter(Sheet sheet) {
         this.sheet = sheet;
     }
-
     public Sheet getSheet() {
         return sheet;
     }

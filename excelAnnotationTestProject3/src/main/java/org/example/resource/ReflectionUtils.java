@@ -6,27 +6,25 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class ReflectionUtils {
     private ReflectionUtils() {}
-    public static List<Field> findAllIncludingAnnotationFields(Class<?> clazz, final Class<? extends Annotation> annotation) {
+    static List<Field> findAllIncludingAnnotationFields(Class<?> clazz, final Class<? extends Annotation> annotation) {
         return findAllIncludingSuperClasses(clazz).stream()
                 .map(c -> c.getDeclaredFields())
                 .flatMap(Arrays :: stream)
                 .filter(field -> field.isAnnotationPresent(annotation))
                 .collect(Collectors.toList());
     }
-    public static List<? extends Annotation> findAllClassAnnotations(Class<?> clazz, final Class<? extends Annotation> annotation) {
+    static List<? extends Annotation> findAllClassAnnotations(Class<?> clazz, final Class<? extends Annotation> annotation) {
         return findAllIncludingSuperClasses(clazz).stream()
                 .map(c -> c.getAnnotationsByType(annotation))
                 .flatMap(Arrays :: stream)
                 .collect(Collectors.toList());
     }
-    protected static <T> T getClass(Class<T> clazz) {
+    static <T> T getClass(Class<T> clazz) {
         try {
             Constructor<?> constructor = clazz.getDeclaredConstructor();
             return (T) constructor.newInstance();
@@ -43,5 +41,4 @@ public final class ReflectionUtils {
         }
         return classes;
     }
-
 }

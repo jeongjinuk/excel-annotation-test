@@ -41,7 +41,7 @@ public class SXXFSExcelFileTest {
             for (T t : data) {
                 renderBody(sheet, ++currentRowIndex, t);
             }
-            renderFormula(sheet, ++currentRowIndex);
+            renderFormula(sheet,0, data);
         }
 
     }

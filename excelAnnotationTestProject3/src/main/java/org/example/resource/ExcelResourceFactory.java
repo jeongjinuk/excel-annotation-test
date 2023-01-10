@@ -1,6 +1,6 @@
 package org.example.resource;
 
-import org.example.FormulaTemplate;
+import org.example.excel.FormulaTemplate;
 import org.example.ExcelColumn;
 import org.example.Formula;
 import org.example.exception.DuplicateColumnIndexException;
@@ -15,15 +15,17 @@ import java.util.stream.Collectors;
 
 public final class ExcelResourceFactory {
     private ExcelResourceFactory() {}
+
     public static ExcelResource prepareExcelResource(Class<?> type) {
         Map<Field, ExcelColumn> fieldResource = prepareFieldResource(type);
         fieldResourceValidation(fieldResource, type);
 
-        List<? extends FormulaTemplate<?>> formulaResource = prepareFormulaResource(type);
+        List<? extends FormulaTemplate> formulaResource = prepareFormulaResource(type);
 
         Map<String, Integer> fieldNameWithColumnIndexResource = prepareFieldNameWithColumnIndexResource(fieldResource);
         return new ExcelResource(fieldResource, formulaResource, fieldNameWithColumnIndexResource);
     }
+
     private static Map<Field, ExcelColumn> prepareFieldResource(Class<?> type) {
         return ReflectionUtils.findAllIncludingAnnotationFields(type, ExcelColumn.class).stream()
                 .collect(
@@ -33,19 +35,23 @@ public final class ExcelResourceFactory {
                                 (field, annotation) -> field,
                                 LinkedHashMap :: new));
     }
-    private static List<? extends FormulaTemplate<?>>  prepareFormulaResource(Class<?> type) {
+
+    private static List<? extends FormulaTemplate> prepareFormulaResource(Class<?> type) {
         return ReflectionUtils.findAllClassAnnotations(type, Formula.class).stream()
                 .map(annotation -> ((Formula) annotation))
                 .map(formula -> ReflectionUtils.getClass(formula.expression()))
                 .collect(Collectors.toList());
     }
+
     private static Map<String, Integer> prepareFieldNameWithColumnIndexResource(Map<Field, ExcelColumn> fieldResource) {
-        return fieldResource.entrySet().stream().collect(Collectors.toMap(
-                entry -> entry.getKey().getName(),
-                entry -> entry.getValue().columnIndex(),
-                (key, value) -> key,
-                LinkedHashMap::new));
+        return fieldResource.entrySet().stream().collect(
+                Collectors.toMap(
+                        entry -> entry.getKey().getName(),
+                        entry -> entry.getValue().columnIndex(),
+                        (key, value) -> key,
+                        LinkedHashMap :: new));
     }
+
     private static void fieldResourceValidation(Map<Field, ExcelColumn> resource, Class<?> type) {
         if (resource.isEmpty()) {
             throw new NotFoundExcelColumnAnnotationException(String.format("%s has not @ExcelColumn at all", type));
@@ -61,7 +67,7 @@ public final class ExcelResourceFactory {
             throw new DuplicateColumnIndexException(String.format("%s has duplicate column index properties", type));
         }
 
-        int min = collect.stream().min(Integer :: min).get();
+        int min = collect.stream().min(Math :: min).get();
         if (min < 0) {
             throw new NegativeColumnIndexPropertyException(String.format("%s has Negative column index property", type));
         }

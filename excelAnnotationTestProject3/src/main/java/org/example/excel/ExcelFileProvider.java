@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class AbstractExcelFile<T> {
+public abstract class ExcelFileProvider<T> {
     private ExcelResource excelResource;
     protected Workbook workbook;
-    protected AbstractExcelFile(List<T> data, Class<?> clazz, Workbook workbook) {
-        validateData(data);
+    protected ExcelFileProvider(List<T> data, Class<?> clazz, Workbook workbook) {
+        validate(data);
         this.excelResource = ExcelResourceFactory.prepareExcelResource(clazz);
         this.workbook = workbook;
         renderExcel(data);
@@ -26,7 +26,7 @@ public abstract class AbstractExcelFile<T> {
     public Workbook getWorkbook(){
         return this.workbook;
     }
-    protected void validateData(List<T> data){}
+    protected void validate(List<T> data){}
     protected abstract void renderExcel(List<T> data);
     protected void renderHeader(Sheet sheet, int rowIndex){
         Row row = sheet.createRow(rowIndex);
@@ -46,11 +46,11 @@ public abstract class AbstractExcelFile<T> {
             renderCellValue(field, cell, data);
         }
     }
-    protected void renderFormula(Sheet sheet, int rowIndex){
+    protected void renderFormula(Sheet sheet,int criteriaRowIndex, List<T> data){
         Map<String, Integer> fieldNameWithColumnIndexResource = excelResource.getFieldNameWithColumnIndexResource();
-        AdapterSheet adapterSheet = new AdapterSheet(sheet);
+        SheetAdapter sheetAdapter = new SheetAdapter(sheet);
         excelResource.getFormulaResource().stream()
-                .forEach(formula -> formula.formulaRender(adapterSheet,rowIndex,fieldNameWithColumnIndexResource));
+                        .forEach(formula -> formula.renderFormula(sheetAdapter, fieldNameWithColumnIndexResource, criteriaRowIndex, data));
     }
     private void renderCellValue(Field field, Cell cell, T data){
         try{
