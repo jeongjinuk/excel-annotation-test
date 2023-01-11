@@ -8,16 +8,15 @@ import org.example.excel.SheetAdapter;
 import java.util.List;
 import java.util.Map;
 
-public class SumFormula implements FormulaTemplate<TestDto> {
+public class SumFormula implements FormulaTemplate{
 
     @Override
-    public void render(SheetAdapter sheet, Map<String, Integer> fieldNameWithColumnIndexMap, int criteriaRowIndex, List<TestDto> data) {
-        CellAddress address1 = sheet.getRow(1).getCell(fieldNameWithColumnIndexMap.get("price")).getAddress();
-        CellAddress address2 = sheet.getRow(sheet.getSheet().getLastRowNum()).getCell(fieldNameWithColumnIndexMap.get("price")).getAddress();
+    public void render(SheetAdapter sheet, Map<String, Integer> fieldNameWithColumnIndexMap, int criteriaRowIndex, List<?> data) {
+        CellAddress address1 = sheet.getCell(criteriaRowIndex, fieldNameWithColumnIndexMap.get("price")).getAddress();
+        CellAddress address2 = sheet.getCell(data.size(), fieldNameWithColumnIndexMap.get("price")).getAddress();
 
-        Cell cell = sheet.getCell(sheet.getSheet().getLastRowNum()+1, fieldNameWithColumnIndexMap.get("price"));
+        Cell cell = sheet.getCell(data.size()+1, fieldNameWithColumnIndexMap.get("price"));
         String formula = String.format("=sum(%s:%s)", address1, address2);
         cell.setCellFormula(formula);
     }
 }
-

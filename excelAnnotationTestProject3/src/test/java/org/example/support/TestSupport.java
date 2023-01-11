@@ -5,7 +5,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import java.io.*;
 
 public class TestSupport {
-
     public static void workBookOutput(Workbook workbook){
         StringBuilder stringBuilder = new StringBuilder(System.getProperty("user.dir")).append("\\src\\test\\resources");
         stringBuilder.append(File.separator);

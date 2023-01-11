@@ -6,8 +6,6 @@ import org.example.excel.SXXFSExcelFile;
 import java.util.List;
 
 public class TestExcelFile<T> extends SXXFSExcelFile<T> {
-    private static final int ROW_START_INDEX = 0;
-    private static int currentRowIndex = ROW_START_INDEX + 1;
 
     public TestExcelFile(List<T> data, Class<?> clazz) {
         super(data, clazz);
@@ -15,10 +13,11 @@ public class TestExcelFile<T> extends SXXFSExcelFile<T> {
     @Override
     protected void renderExcel(List<T> data) {
         Sheet sheet = workbook.createSheet();
-        renderHeader(sheet, ROW_START_INDEX);
+        renderHeader(sheet, 0);
+        int currentRowIndex = 1;
         for (T t : data) {
             renderBody(sheet, currentRowIndex++, t);
         }
-        renderFormula(sheet, 0, data);
+        renderFormula(sheet, 1, data);
     }
 }

@@ -16,7 +16,7 @@ import java.util.Set;
 
 public abstract class ExcelFileProvider<T> {
     private ExcelResource excelResource;
-    protected Workbook workbook;
+    private Workbook workbook;
     protected ExcelFileProvider(List<T> data, Class<?> clazz, Workbook workbook) {
         validate(data);
         this.excelResource = ExcelResourceFactory.prepareExcelResource(clazz);
