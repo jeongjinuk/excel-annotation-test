@@ -4,8 +4,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.example.ExcelColumn;
-import org.example.ExcelException;
+import org.example.annotations.ExcelColumn;
+import org.example.exception.ExcelException;
+import org.example.SheetAdapter;
 import org.example.resource.ExcelResource;
 import org.example.resource.ExcelResourceFactory;
 
@@ -16,7 +17,7 @@ import java.util.Set;
 
 public abstract class ExcelFileProvider<T> {
     private ExcelResource excelResource;
-    private Workbook workbook;
+    protected Workbook workbook;
     protected ExcelFileProvider(List<T> data, Class<?> clazz, Workbook workbook) {
         validate(data);
         this.excelResource = ExcelResourceFactory.prepareExcelResource(clazz);

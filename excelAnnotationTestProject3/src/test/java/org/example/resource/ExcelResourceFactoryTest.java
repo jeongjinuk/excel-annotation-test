@@ -1,7 +1,6 @@
 package org.example.resource;
 
-import lombok.AllArgsConstructor;
-import org.example.ExcelColumn;
+import org.example.annotations.ExcelColumn;
 import org.example.exception.DuplicateColumnIndexException;
 import org.example.exception.NegativeColumnIndexPropertyException;
 import org.example.exception.NotFoundExcelColumnAnnotationException;

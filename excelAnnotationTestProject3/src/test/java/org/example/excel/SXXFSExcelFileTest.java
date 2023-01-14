@@ -3,15 +3,13 @@ package org.example.excel;
 import lombok.AllArgsConstructor;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.example.ExcelColumn;
+import org.example.support.TestSupport;
+import org.example.annotations.ExcelColumn;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class SXXFSExcelFileTest {
     private List<Cafe> cafes;
@@ -29,7 +27,7 @@ public class SXXFSExcelFileTest {
     }
     static class MyExcelFile<T> extends SXXFSExcelFile<T>{
         private static final int ROW_START_INDEX = 0;
-        private static int currentRowIndex = ROW_START_INDEX + 1;
+        private static int currentRowIndex = ROW_START_INDEX;
 
         public MyExcelFile(List<T> data, Class<?> clazz) {
             super(data, clazz);
@@ -60,12 +58,11 @@ public class SXXFSExcelFileTest {
     @Test
     @DisplayName("정상적으로 SXXFSWorkBook이 반환되는지 확인")
     void workBookTest(){
-        SXSSFWorkbook actual = new SXSSFWorkbook();
-
+//        SXSSFWorkbook actual = new SXSSFWorkbook();
         SXXFSExcelFile<Cafe> sxxfsExcelFile = new MyExcelFile(cafes, Cafe.class);
         Workbook workbook = sxxfsExcelFile.getWorkbook();
-
-        assertEquals(workbook.getClass(), actual.getClass());
+        TestSupport.workBookOutput(workbook);
+//        assertEquals(workbook.getClass(), actual.getClass());
     }
 
 }

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.exception;
 
 public class ExcelException extends RuntimeException{
 

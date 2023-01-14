@@ -2,8 +2,8 @@ package org.example.formula.mixed_repeatable_formula;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.util.CellAddress;
-import org.example.excel.FormulaTemplate;
-import org.example.excel.SheetAdapter;
+import org.example.templates.formula.FormulaTemplate;
+import org.example.SheetAdapter;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,6 @@
-package org.example.excel;
+package org.example.templates.formula;
+
+import org.example.SheetAdapter;
 
 import java.util.List;
 import java.util.Map;

@@ -1,13 +1,14 @@
 package org.example.resource;
 
-import org.example.excel.FormulaTemplate;
-import org.example.ExcelColumn;
-import org.example.Formula;
+import org.example.templates.formula.FormulaTemplate;
+import org.example.annotations.ExcelColumn;
+import org.example.annotations.Formula;
 import org.example.exception.DuplicateColumnIndexException;
 import org.example.exception.NegativeColumnIndexPropertyException;
 import org.example.exception.NotFoundExcelColumnAnnotationException;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +39,9 @@ public final class ExcelResourceFactory {
 
     private static List<? extends FormulaTemplate> prepareFormulaResource(Class<?> type) {
         return ReflectionUtils.findAllClassAnnotations(type, Formula.class).stream()
-                .map(annotation -> ((Formula) annotation))
-                .map(formula -> ReflectionUtils.getClass(formula.expression()))
+                .map(annotation -> ((Formula) annotation).expression())
+                .flatMap(Arrays :: stream)
+                .map(formulaTemplate -> ReflectionUtils.getClass(formulaTemplate))
                 .collect(Collectors.toList());
     }
 

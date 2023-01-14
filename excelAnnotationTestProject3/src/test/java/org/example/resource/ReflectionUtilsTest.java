@@ -2,8 +2,7 @@ package org.example.resource;
 
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.time.StopWatch;
-import org.example.ExcelColumn;
-import org.example.resource.ReflectionUtils;
+import org.example.annotations.ExcelColumn;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

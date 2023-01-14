@@ -1,8 +1,8 @@
 package org.example.resource;
 
 import lombok.Getter;
-import org.example.excel.FormulaTemplate;
-import org.example.ExcelColumn;
+import org.example.templates.formula.FormulaTemplate;
+import org.example.annotations.ExcelColumn;
 
 import java.lang.reflect.Field;
 import java.util.List;

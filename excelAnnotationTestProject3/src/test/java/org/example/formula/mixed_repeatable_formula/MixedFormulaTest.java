@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.example.ExcelColumn;
-import org.example.Formula;
+import org.example.annotations.ExcelColumn;
+import org.example.annotations.Formula;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +17,7 @@ public class MixedFormulaTest {
 
     @DisplayName("만약 price에 대한 행방향 sum, 열방향 tex를 같이 표현해야하는 수식이 존재하면 필요한 DTO")
     @AllArgsConstructor
-    @Formula(expression = SumFormula.class)
-    @Formula(expression = TexFormula.class)
+    @Formula(expression = {SumFormula.class, TexFormula.class})
     public class MixedFormulas {
         @ExcelColumn(headerName = "이름", columnIndex = 0)
         private String name;
@@ -55,8 +54,8 @@ public class MixedFormulaTest {
     }
 
     @DisplayName("같은 price 필드에 대한 sum 수식이 존재하는데 DTO가 다를 경우 (A class, B class)")
-    @Formula(expression = SumFormula.class)
     @AllArgsConstructor
+    @Formula(expression = SumFormula.class)
     class A {
         @ExcelColumn(columnIndex = 0, headerName = "이름")
         private String name;
@@ -67,8 +66,8 @@ public class MixedFormulaTest {
     }
 
     @DisplayName("같은 price 필드에 대한 sum 수식이 존재하는데 DTO가 다를 경우 (A class, B class)")
-    @Formula(expression = SumFormula.class)
     @AllArgsConstructor
+    @Formula(expression = SumFormula.class)
     class B {
         @ExcelColumn(columnIndex = 0, headerName = "이름")
         private String name;
