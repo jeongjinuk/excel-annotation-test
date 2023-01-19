@@ -1,4 +1,4 @@
-package org.example.annotations;
+package org.example;
 
 import org.example.templates.formula.FormulaTemplate;
 
@@ -10,4 +10,5 @@ import java.lang.annotation.*;
 //@Repeatable(value = Formulas.class)
 public @interface Formula {
     Class<? extends FormulaTemplate>[] expression();
+
 }

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.templates;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class SheetAdapter {
+public final class SheetAdapter {
     private Sheet sheet;
     public SheetAdapter(Sheet sheet) {
         this.sheet = sheet;
