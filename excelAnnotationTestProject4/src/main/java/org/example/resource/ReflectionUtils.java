@@ -1,6 +1,6 @@
 package org.example.resource;
 
-import org.example.exception.InvalidExcelFormulaClassException;
+import org.example.exception.ExcelException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -33,7 +33,7 @@ public final class ReflectionUtils {
             return (T) constructor.newInstance();
         } catch (NoSuchMethodException | InvocationTargetException |
                  InstantiationException | IllegalAccessException e) {
-            throw new InvalidExcelFormulaClassException(e.getMessage(), e);
+            throw new ExcelException(e.getMessage(), e);
         }
     }
     private static List<Class<?>> getAllClassesIncludingSuperClasses(Class<?> clazz, boolean superClasses) {

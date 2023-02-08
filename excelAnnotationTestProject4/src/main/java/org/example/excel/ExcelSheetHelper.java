@@ -60,12 +60,10 @@ public class ExcelSheetHelper implements ExcelSheet {
         }
         return getCell(row, this.fieldIndexMap.get(fieldName)).getAddress().formatAsString();
     }
-
     @Override
     public String getCellAddress(int row, int col, CellAddressType type) {
         return CellAddressType.convert(getCellAddress(row,col), type);
     }
-
     @Override
     public String getCellAddressByFieldName(int row, String fieldName, CellAddressType type) {
         return CellAddressType.convert(getCellAddressByFieldName(row,fieldName), type);
@@ -79,7 +77,6 @@ public class ExcelSheetHelper implements ExcelSheet {
         }
         cell.setCellValue(o == null ? "" : o.toString());
     }
-
     @Override
     public void setFormulaCell(Cell cell, String formula) {
         cell.setCellFormula(formula);
