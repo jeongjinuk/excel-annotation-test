@@ -50,7 +50,7 @@ public final class ExcelResourceFactory {
 
     private static List<? extends Formula> prepareFormulaResource(Class<?> type) {
         return ReflectionUtils.getClassAnnotationList(type, ExcelFormula.class, false).stream()
-                .map(annotation -> ((ExcelFormula) annotation).expression())
+                .map(annotation -> ((ExcelFormula) annotation).formulaClass())
                 .flatMap(Arrays :: stream)
                 .map(ReflectionUtils :: getInstance)
                 .collect(Collectors.toList());

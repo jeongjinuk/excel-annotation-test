@@ -1,10 +1,14 @@
-package org.example.excel.sheet.cell;
+package org.example.excel.sheet;
+
+import java.util.regex.Pattern;
 
 public enum CellAddressType {
     ROW_ABS,
     COL_ABS,
     ABS;
 
+    private static final Pattern ROW_ABS_PATTERN = Pattern.compile("[0-9]+");
+    private static final Pattern COL_ABS_PATTERN = Pattern.compile("[A-Z]+");
     public static String convert(String str, CellAddressType type){
         switch (type){
             case ABS:
@@ -20,15 +24,13 @@ public enum CellAddressType {
 
     private static StringBuilder convertRowABS(String str){
         StringBuilder stringBuilder = new StringBuilder("$");
-        CellAddressPattern.ROW_ABS_PATTERN.getPattern()
-                .matcher(str).results()
+        ROW_ABS_PATTERN.matcher(str).results()
                 .forEach(stringBuilder::append);
         return stringBuilder;
     }
     private static StringBuilder convertColABS(String str){
         StringBuilder stringBuilder = new StringBuilder("$");
-        CellAddressPattern.COL_ABS_PATTERN.getPattern()
-                .matcher(str).results()
+        COL_ABS_PATTERN.matcher(str).results()
                 .forEach(stringBuilder::append);
         return stringBuilder;
     }

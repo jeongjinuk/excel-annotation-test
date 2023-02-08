@@ -8,5 +8,5 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExcelFormula {
-    Class<? extends Formula>[] expression();
+    Class<? extends Formula>[] formulaClass();
 }

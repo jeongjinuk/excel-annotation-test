@@ -12,11 +12,11 @@ import org.example.excel.style.NameStyle;
 
 @AllArgsConstructor
 @Builder
-@ExcelFormula(expression = SumFormula.class)
-@ExcelStyle(header = DefaultHeaderStyle.class, body = DefaultBodyStyle.class)
+@ExcelFormula(formulaClass = SumFormula.class)
+@ExcelStyle(headerStyleClass = DefaultHeaderStyle.class, bodyStyleClass = DefaultBodyStyle.class)
 public class TestDTO {
 
-    @ExcelStyle(body = NameStyle.class)
+    @ExcelStyle(bodyStyleClass = NameStyle.class)
     @ExcelColumn(headerName = "이름")
     private String name;
 
@@ -26,7 +26,7 @@ public class TestDTO {
     @ExcelColumn(headerName = "나이")
     private int age;
 
-    @ExcelStyle(header = NameStyle.class)
+    @ExcelStyle(headerStyleClass = NameStyle.class)
     @ExcelColumn(headerName = "여부")
     private boolean is;
 }

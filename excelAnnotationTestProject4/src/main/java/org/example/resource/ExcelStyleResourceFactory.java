@@ -17,15 +17,15 @@ public final class ExcelStyleResourceFactory {
                     ExcelStyleResource styleResource,
                     ExcelStyle excelStyle,
                     String key){
-        put(cellStyleSupplier, styleResource::putHeaderStyle, excelStyle::header, key);
-        put(cellStyleSupplier, styleResource::putBodyStyle, excelStyle::body, key);
+        put(cellStyleSupplier, styleResource::putHeaderStyle, excelStyle::headerStyleClass, key);
+        put(cellStyleSupplier, styleResource::putBodyStyle, excelStyle::bodyStyleClass, key);
     }
 
     static void put(Supplier<CellStyle> cellStyleSupplier,
                     ExcelStyleResource styleResource,
                     ExcelStyle excelStyle){
-        put(cellStyleSupplier, styleResource::putHeaderStyle, excelStyle::header, DefaultStyleKey.DEFAULT_HEADER_STYLE.getLocation());
-        put(cellStyleSupplier, styleResource::putBodyStyle, excelStyle::body, DefaultStyleKey.DEFAULT_BODY_STYLE.getLocation());
+        put(cellStyleSupplier, styleResource::putHeaderStyle, excelStyle::headerStyleClass, DefaultStyleKey.DEFAULT_HEADER_STYLE.getLocation());
+        put(cellStyleSupplier, styleResource::putBodyStyle, excelStyle::bodyStyleClass, DefaultStyleKey.DEFAULT_BODY_STYLE.getLocation());
     }
 
     private static void put(Supplier<CellStyle> cellStyleSupplier,

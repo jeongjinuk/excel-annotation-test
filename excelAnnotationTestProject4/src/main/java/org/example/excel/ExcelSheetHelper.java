@@ -4,7 +4,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.example.excel.sheet.cell.CellAddressType;
+import org.example.excel.sheet.CellAddressType;
 import org.example.excel.sheet.ExcelSheet;
 import org.example.excel.style.StyleLocation;
 import org.example.exception.ExcelException;
@@ -71,6 +71,11 @@ public class ExcelSheetHelper implements ExcelSheet {
     @Override
     public String getCellAddressByFieldName(int row, String fieldName, CellAddressType type) {
         return CellAddressType.convert(getCellAddressByFieldName(row,fieldName), type);
+    }
+
+    @Override
+    public boolean containsFieldName(String fieldName) {
+        return this.fieldIndexMap.containsKey(fieldName);
     }
 
     @Override

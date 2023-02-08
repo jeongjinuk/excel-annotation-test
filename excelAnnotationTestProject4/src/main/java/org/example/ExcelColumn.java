@@ -9,5 +9,4 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExcelColumn {
     String headerName() default "";
-//    HeaderStyle headerStyle() default @HeaderStyle(style = DefaultStyle.class);
 }
