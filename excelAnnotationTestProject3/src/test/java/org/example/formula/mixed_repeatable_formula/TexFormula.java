@@ -16,6 +16,7 @@ public class TexFormula implements FormulaTemplate {
         for (int i = start; i <= data.size(); i++) {
             CellAddress address = sheet.getRow(i).getCell(fieldNameWithColumnIndexMap.get("price")).getAddress();
             Cell cell = sheet.getCell(i, sheet.getRow(i).getLastCellNum());
+
             String formula = String.format("=%s*1.1", address);
             cell.setCellFormula(formula);
         }

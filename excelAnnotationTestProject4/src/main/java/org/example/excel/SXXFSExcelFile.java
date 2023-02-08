@@ -5,7 +5,7 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.util.List;
 
-public abstract class SXXFSExcelFile<T> extends ExcelFileProvider<T> {
+public abstract class SXXFSExcelFile<T> extends ExcelFile<T> {
 
     public SXXFSExcelFile(List<T> data, Class<?> clazz) {
         super(data, clazz, new SXSSFWorkbook());

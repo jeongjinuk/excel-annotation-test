@@ -1,7 +1,6 @@
 package org.example.support;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.io.*;
 
@@ -17,12 +16,5 @@ public class TestSupport {
             throw new RuntimeException(e);
         }
     }
-
-
-
-    void test(){
-        Workbook workbook = new SXSSFWorkbook();
-    }
-
 
 }
