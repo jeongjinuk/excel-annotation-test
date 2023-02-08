@@ -49,10 +49,12 @@ public class ExcelSheetHelper implements ExcelSheet {
         }
         return getCell(row, this.fieldIndexMap.get(fieldName));
     }
+
     @Override
     public String getCellAddress(int row, int col) {
         return getCell(row, col).getAddress().formatAsString();
     }
+
     @Override
     public String getCellAddressByFieldName(int row, String fieldName) {
         if (!this.fieldIndexMap.containsKey(fieldName)){
@@ -60,14 +62,17 @@ public class ExcelSheetHelper implements ExcelSheet {
         }
         return getCell(row, this.fieldIndexMap.get(fieldName)).getAddress().formatAsString();
     }
+
     @Override
     public String getCellAddress(int row, int col, CellAddressType type) {
         return CellAddressType.convert(getCellAddress(row,col), type);
     }
+
     @Override
     public String getCellAddressByFieldName(int row, String fieldName, CellAddressType type) {
         return CellAddressType.convert(getCellAddressByFieldName(row,fieldName), type);
     }
+
     @Override
     public void setCellValue(Cell cell, Object o) {
         if (o instanceof Number) {
@@ -77,6 +82,7 @@ public class ExcelSheetHelper implements ExcelSheet {
         }
         cell.setCellValue(o == null ? "" : o.toString());
     }
+
     @Override
     public void setFormulaCell(Cell cell, String formula) {
         cell.setCellFormula(formula);
