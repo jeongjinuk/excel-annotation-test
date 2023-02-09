@@ -1,11 +1,12 @@
-package org.example.excel;
+package org.example.workbook;
 
 import org.apache.poi.ss.usermodel.Sheet;
+import org.example.excel.SXXFSExcelFile;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class MySXXFS<T> extends SXXFSExcelFile{
+public class MySXXFS<T> extends SXXFSExcelFile {
 
     public MySXXFS(List data, Class clazz) {
         super(data, clazz);

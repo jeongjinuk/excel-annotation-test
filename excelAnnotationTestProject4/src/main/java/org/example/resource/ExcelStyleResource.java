@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-
 public final class ExcelStyleResource {
     private final Map<String, CellStyle> headerStyle = new HashMap<>();
     private final Map<String, CellStyle> bodyStyle = new HashMap<>();

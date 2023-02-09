@@ -8,7 +8,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
-@Getter
 public final class ExcelResource {
     private final Map<Field, ExcelColumn> fieldResource;
     private final List<? extends Formula> formulaResource;
@@ -20,5 +19,21 @@ public final class ExcelResource {
         this.formulaResource = formulaResource;
         this.fieldNameWithColumnIndexResource = fieldNameWithColumnIndexResource;
         this.excelStyleResource = excelStyleResource;
+    }
+
+    public Map<Field, ExcelColumn> getFieldResource() {
+        return fieldResource;
+    }
+
+    public List<? extends Formula> getFormulaResource() {
+        return formulaResource;
+    }
+
+    public Map<String, Integer> getFieldNameWithColumnIndexResource() {
+        return fieldNameWithColumnIndexResource;
+    }
+
+    public ExcelStyleResource getExcelStyleResource() {
+        return excelStyleResource;
     }
 }

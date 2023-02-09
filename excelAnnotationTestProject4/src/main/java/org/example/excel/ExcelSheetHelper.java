@@ -45,39 +45,33 @@ public class ExcelSheetHelper implements ExcelSheet {
     @Override
     public Cell getCellByFieldName(int row, String fieldName) {
         if (!this.fieldIndexMap.containsKey(fieldName)){
-            throw new NoSuchFieldNameException(String.format("'%s' does not exist", fieldName));
+            throw new NoSuchFieldNameException(String.format("'%s' field does not exist", fieldName));
         }
         return getCell(row, this.fieldIndexMap.get(fieldName));
     }
-
     @Override
     public String getCellAddress(int row, int col) {
         return getCell(row, col).getAddress().formatAsString();
     }
-
     @Override
     public String getCellAddressByFieldName(int row, String fieldName) {
         if (!this.fieldIndexMap.containsKey(fieldName)){
-            throw new NoSuchFieldNameException(String.format("'%s' does not exist", fieldName));
+            throw new NoSuchFieldNameException(String.format("'%s' field does not exist", fieldName));
         }
         return getCell(row, this.fieldIndexMap.get(fieldName)).getAddress().formatAsString();
     }
-
     @Override
     public String getCellAddress(int row, int col, CellAddressType type) {
         return CellAddressType.convert(getCellAddress(row,col), type);
     }
-
     @Override
     public String getCellAddressByFieldName(int row, String fieldName, CellAddressType type) {
         return CellAddressType.convert(getCellAddressByFieldName(row,fieldName), type);
     }
-
     @Override
     public boolean containsFieldName(String fieldName) {
         return this.fieldIndexMap.containsKey(fieldName);
     }
-
     @Override
     public void setCellValue(Cell cell, Object o) {
         if (o instanceof Number) {
@@ -87,12 +81,10 @@ public class ExcelSheetHelper implements ExcelSheet {
         }
         cell.setCellValue(o == null ? "" : o.toString());
     }
-
     @Override
     public void setFormulaCell(Cell cell, String formula) {
         cell.setCellFormula(formula);
     }
-
     void setStyle(Cell cell, String fieldName, StyleLocation styleLocation){
         Optional<CellStyle> cellStyle = this.styleResource.findByFieldName(fieldName, styleLocation);
         if (cellStyle.isEmpty()){
@@ -100,7 +92,6 @@ public class ExcelSheetHelper implements ExcelSheet {
         }
         cell.setCellStyle(cellStyle.get());
     }
-
     <T> void setCellValue(Field field, Cell cell, T data) {
         try {
             field.setAccessible(true);
