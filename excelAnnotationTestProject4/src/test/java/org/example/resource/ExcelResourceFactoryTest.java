@@ -23,7 +23,7 @@ class ExcelResourceFactoryTest {
     private Counter counter = new Counter();
 
     @Test
-    @DisplayName("리소스 팩토리에서 만드는 엑셀리소스가 정상적인지 확인하는 테스트, style은 optinal을 반환하기 때문에 검사할게 따로없다.")
+    @DisplayName("리소스 팩토리에서 만드는 엑셀리소스가 정상적인지 확인하는 테스트, style은 optional을 반환하기 때문에 검사할게 따로없다.")
     void prepareExcelResource() {
         XSSFWorkbook workbook = new XSSFWorkbook();
         ExcelResource excelResource = ExcelResourceFactory.prepareExcelResource(TestDTO.class, workbook);
