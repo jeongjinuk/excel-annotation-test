@@ -86,12 +86,14 @@ public class ExcelSheetHelper implements ExcelSheet {
         cell.setCellFormula(formula);
     }
     void setStyle(Cell cell, String fieldName, StyleLocation styleLocation){
+        // null이 아니면으로 바꾸기
         Optional<CellStyle> cellStyle = this.styleResource.findByFieldName(fieldName, styleLocation);
         if (cellStyle.isEmpty()){
             return;
         }
         cell.setCellStyle(cellStyle.get());
     }
+
     <T> void setCellValue(Field field, Cell cell, T data) {
         try {
             field.setAccessible(true);

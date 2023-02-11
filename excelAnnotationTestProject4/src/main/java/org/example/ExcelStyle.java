@@ -1,5 +1,8 @@
 package org.example;
 
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.example.excel.style.NoStyle;
 import org.example.excel.style.Style;
 
@@ -13,4 +16,5 @@ import java.lang.annotation.Target;
 public @interface ExcelStyle {
     Class<? extends Style> headerStyleClass() default NoStyle.class;
     Class<? extends Style> bodyStyleClass() default NoStyle.class;
+    String dataFormat() default "";
 }

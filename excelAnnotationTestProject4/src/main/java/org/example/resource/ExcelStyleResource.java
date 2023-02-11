@@ -32,8 +32,7 @@ public final class ExcelStyleResource {
 
     private Optional<CellStyle> findByFieldName(String key, Map<String, CellStyle> styleMap, DefaultStyleKey defaultStyleKey) {
         Optional<CellStyle> style = getCellStyle(styleMap, key);
-        Optional<CellStyle> defaultStyle = getCellStyle(styleMap, defaultStyleKey.getLocation());
-        return !style.isEmpty() ? style : defaultStyle;
+        return !style.isEmpty() ? style : getCellStyle(styleMap, defaultStyleKey.getLocation());
     }
 
     private Optional<CellStyle> getCellStyle(Map<String, CellStyle> map, String key) {

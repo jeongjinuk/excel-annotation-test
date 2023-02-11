@@ -1,9 +1,6 @@
 package org.example.style;
 
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.*;
 import org.example.excel.style.Style;
 
 public class DefaultHeaderStyle implements Style {
@@ -22,4 +19,5 @@ public class DefaultHeaderStyle implements Style {
         cellStyle.setFillForegroundColor(IndexedColors.BLUE.getIndex());
         cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
     }
+
 }

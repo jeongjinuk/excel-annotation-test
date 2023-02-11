@@ -85,12 +85,15 @@ public final class ExcelResourceFactory {
 
     private static void putStyle(Class<?> type, Workbook workbook, ExcelStyleResource excelStyleResource) {
         ReflectionUtils.getFieldWithAnnotationList(type, ExcelStyle.class, false).stream()
+                .filter(field -> field.isAnnotationPresent(ExcelColumn.class))
                 .forEach(field ->
                         ExcelStyleResourceFactory.put(
                                 workbook :: createCellStyle,
                                 excelStyleResource,
-                                field.getDeclaredAnnotation(ExcelStyle.class),
+                                field.getDeclaredAnnotation(ExcelStyle.class), // getformat을 추가 해야함
                                 field.getName()));
+
+
     }
 
     private static void fieldResourceValidate(Map<Field, ExcelColumn> resource, Class<?> type) {

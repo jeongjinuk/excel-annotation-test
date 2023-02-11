@@ -10,6 +10,9 @@ import org.example.style.DefaultHeaderStyle;
 import org.example.style.custom_field_style.DoubleBorderLine;
 import org.example.style.custom_field_style.IndigoBackgroundColor;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Builder
 @ExcelFormula(formulaClass = Counter.class)
 @ExcelStyle(headerStyleClass = DefaultHeaderStyle.class, bodyStyleClass = DefaultBodyStyle.class)
@@ -31,4 +34,8 @@ public class TestDTO {
     @ExcelStyle(headerStyleClass = DoubleBorderLine.class, bodyStyleClass = IndigoBackgroundColor.class)
     @ExcelColumn(headerName = "여부")
     private boolean is;
+
+    @ExcelColumn(headerName = "날짜")
+    private LocalDate date;
+
 }

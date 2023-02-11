@@ -8,10 +8,12 @@ import org.example.style.DefaultBodyStyle;
 import org.example.style.DefaultHeaderStyle;
 import org.example.style.custom_field_style.DoubleBorderLine;
 import org.example.style.custom_field_style.IndigoBackgroundColor;
+import org.example.support.TestSupport;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -27,7 +29,7 @@ public class WorkBookTest {
         this.list = IntStream.rangeClosed(0,50)
                 .mapToObj(operand ->
                         TestDTO.builder()
-                                .name(String.valueOf(operand))
+                                .name(String.valueOf(operand*10000))
                                 .address(String.format("%s, %s%s - %s", operand,operand,operand,operand))
                                 .email(operand + email)
                                 .age(operand)
@@ -41,6 +43,26 @@ public class WorkBookTest {
         MySXXFS<TestDTO> mySXXFS = new MySXXFS<>(list, TestDTO.class);
         Workbook workbook = mySXXFS.getWorkbook();
         assertThat(workbook);
+    }
+
+    @Test
+    void workbookMade(){
+        String email = "@test.com";
+        List<TestDTO> collect = IntStream.rangeClosed(0, 10)
+                .mapToObj(operand ->
+                        TestDTO.builder()
+                                .name(String.valueOf(operand * 10000))
+                                .address(String.format("%s, %s%s - %s", operand, operand, operand, operand))
+                                .email(operand + email)
+                                .age(operand)
+                                .is(operand % 2 == 1)
+                                .date(LocalDate.now().minusDays(operand))
+                                .build()
+                ).collect(Collectors.toList());
+
+        MySXXFS<TestDTO> mySXXFS = new MySXXFS<>(collect, TestDTO.class);
+        Workbook workbook = mySXXFS.getWorkbook();
+        TestSupport.workBookOutput(workbook);
     }
 
     void assertThat(Workbook workbook){
