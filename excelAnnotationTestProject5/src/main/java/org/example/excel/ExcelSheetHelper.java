@@ -7,6 +7,9 @@ import org.example.exception.ExcelException;
 import org.example.exception.NoSuchFieldNameException;
 
 import java.lang.reflect.Field;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -67,11 +70,32 @@ public class ExcelSheetHelper implements SheetHelper {
     }
     @Override
     public void setCellValue(Cell cell, Object o) {
+        if (o instanceof LocalDate){
+            LocalDate tmp = (LocalDate) o;
+            cell.setCellValue(LocalDateTime.of(tmp,LocalTime.NOON));
+            return;
+        }
+        if (o instanceof LocalTime){
+            LocalTime tmp = (LocalTime) o;
+            cell.setCellValue(LocalDateTime.of(LocalDate.EPOCH,tmp));
+            return;
+        }
+        if (o instanceof LocalDateTime){
+            cell.setCellValue((LocalDateTime) o);
+            return;
+        }
+
+        if (o instanceof Date){
+            cell.setCellValue((Date) o);
+            return;
+        }
+
         if (o instanceof Number) {
             Number number = (Number) o;
             cell.setCellValue(number.doubleValue());
             return;
         }
+
         cell.setCellValue(o == null ? "" : o.toString());
     }
     @Override

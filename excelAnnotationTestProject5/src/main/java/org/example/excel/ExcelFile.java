@@ -14,8 +14,8 @@ public abstract class ExcelFile<T> {
     private ExcelSheetHelper excelSheetHelper;
     protected ExcelFile(List<T> data, Class<?> clazz, Workbook workbook) {
         validate(data);
-        this.excelResource = ExcelResourceFactory.prepareExcelResource(clazz, workbook);
         this.workbook = workbook;
+        this.excelResource = ExcelResourceFactory.prepareExcelResource(clazz, workbook);
         this.excelSheetHelper = new ExcelSheetHelper(excelResource.getFieldNameWithColumnIndexResource());
         renderExcel(data);
     }

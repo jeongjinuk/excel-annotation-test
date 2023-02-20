@@ -1,6 +1,5 @@
 package org.example.resource;
 
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.example.ExcelStyle;
@@ -8,13 +7,10 @@ import org.example.excel.style.NoStyle;
 import org.example.excel.style.Style;
 import org.example.excel.style.StyleLocation;
 
-import java.awt.*;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.*;
 import java.util.List;
-import java.util.function.*;
-import java.util.stream.Stream;
+import java.util.Optional;
+import java.util.function.Function;
 
 public final class ExcelStyleResourceFactory {
     private CellStyle defaultHeaderStyle;
@@ -22,7 +18,6 @@ public final class ExcelStyleResourceFactory {
     private final Workbook workbook;
     private final List<Field> fields;
     private final Optional<ExcelStyle> defaultStyle;
-
 
     public ExcelStyleResourceFactory(List<Field> fields, Optional<ExcelStyle> defaultStyle, Workbook workbook) {
         this.workbook = workbook;
@@ -37,7 +32,7 @@ public final class ExcelStyleResourceFactory {
         defaultStyle.ifPresent(this :: configDefaultCellStyle);
         fields.stream()
                 .filter(field -> isExcelStyleAnnotationPresent(field, excelStyleResource))
-                .forEach(field -> configCellStyle(field,excelStyleResource)); // 셋팅 이후 풋
+                .forEach(field -> configCellStyle(field,excelStyleResource));
         return excelStyleResource;
     }
 
@@ -92,6 +87,4 @@ public final class ExcelStyleResourceFactory {
     private boolean isNoStyleClass(Class<? extends Style> c) {
         return NoStyle.class.equals(c);
     }
-
-
 }

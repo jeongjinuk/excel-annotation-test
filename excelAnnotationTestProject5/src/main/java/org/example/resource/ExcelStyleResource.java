@@ -1,13 +1,11 @@
 package org.example.resource;
 
-import lombok.ToString;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.example.excel.style.StyleLocation;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@ToString
 public final class ExcelStyleResource {
     private final Map<String, CellStyle> headerMap = new HashMap<>();
     private final Map<String, CellStyle> bodyMap = new HashMap<>();

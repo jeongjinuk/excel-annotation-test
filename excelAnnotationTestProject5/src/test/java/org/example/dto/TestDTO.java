@@ -10,6 +10,7 @@ import org.example.style.DefaultStyleBorder;
 import org.example.style.ThinLine;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Builder
 @ExcelFormula(formulaClass = Counter.class)
@@ -31,7 +32,7 @@ public class TestDTO {
     @ExcelColumn(headerName = "여부")
     private boolean is;
 
-    @ExcelStyle(bodyStyleClass = ThinLine.class, format = "yyyy--mm--dd")
+    @ExcelStyle(bodyStyleClass = ThinLine.class, format = "AM/PM h:mm:ss;@")
     @ExcelColumn(headerName = "날짜")
     private LocalDate date;
 }

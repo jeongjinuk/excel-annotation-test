@@ -1,6 +1,5 @@
 package org.example.resource;
 
-import lombok.Getter;
 import org.example.ExcelColumn;
 import org.example.excel.formula.Formula;
 
@@ -15,7 +14,7 @@ public final class ExcelResource {
     private final Map<String, Integer> fieldNameWithColumnIndexResource;
     private final ExcelStyleResource excelStyleResource;
 
-    public ExcelResource(Map<Field, ExcelColumn> fieldResource, List<? extends Formula> formulaResource, Map<String, Integer> fieldNameWithColumnIndexResource, ExcelStyleResource excelStyleResource) {
+    ExcelResource(Map<Field, ExcelColumn> fieldResource, List<? extends Formula> formulaResource, Map<String, Integer> fieldNameWithColumnIndexResource, ExcelStyleResource excelStyleResource) {
         this.fieldResource = fieldResource;
         this.formulaResource = formulaResource;
         this.fieldNameWithColumnIndexResource = fieldNameWithColumnIndexResource;
