@@ -29,7 +29,6 @@ public final class ExcelResourceFactory {
         Map<String, Integer> fieldNameWithColumnIndexResource = prepareFieldNameWithColumnIndexResource(fieldResource);
 
         ExcelStyleResource excelStyleResource = prepareStyleResource(type, workbook);
-        System.out.println(excelStyleResource.toString());
 
         return new ExcelResource(fieldResource,
                 formulaResource,
@@ -71,7 +70,7 @@ public final class ExcelResourceFactory {
         List<Field> fields = ReflectionUtils.getFieldWithAnnotationList(type, ExcelColumn.class, false);
 
         return new ExcelStyleResourceFactory(fields,defaultStyle,workbook)
-                .getExcelStyleResource();
+                .createExcelStyleResource();
     }
 
 
