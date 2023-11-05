@@ -12,6 +12,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
+/**
+ * The type Class model registrator.
+ */
 public final class ClassModelRegistrator {
     private static final ConcurrentHashMap<Class<?>, List<ClassModel>> CLASS_MODEL_MAP = new ConcurrentHashMap<>();
 
@@ -19,13 +22,33 @@ public final class ClassModelRegistrator {
         throw new IllegalStateException("Registrator Class");
     }
 
+    /**
+     * Add.
+     *
+     * @param clazz the clazz
+     */
     public static void add(Class<?> clazz) {
         CLASS_MODEL_MAP.put(clazz, List.of(createClassModels(clazz)));
     }
+
+    /**
+     * Gets or default.
+     *
+     * @param clazz the clazz
+     * @return the or default
+     */
     static List<ClassModel> getOrDefault(Class<?> clazz) {
         List<ClassModel> classModels = CLASS_MODEL_MAP.get(clazz);
         return  Objects.nonNull(classModels) ? classModels : List.of(createClassModels(clazz));
     }
+
+    /**
+     * Create class models class model [ ].
+     *
+     * @param <T>   the type parameter
+     * @param clazz the clazz
+     * @return the class model [ ]
+     */
     static <T> ClassModel[] createClassModels(Class<T> clazz) {
         Function<Field, ClassModel> classModelSupplier = ClassModel::new;
         SheetStyleConfigurer sheetStyle = ClassModel.createSheetStyle(clazz);

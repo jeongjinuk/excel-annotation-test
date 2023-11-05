@@ -17,25 +17,60 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+/**
+ * The type Excel sheet.
+ */
 public class ExcelSheet {
     private final Workbook _wb;
     private final Sheet sheet;
 
+    /**
+     * Instantiates a new Excel sheet.
+     *
+     * @param workbook the workbook
+     * @param sheet    the sheet
+     */
     public ExcelSheet(Workbook workbook, Sheet sheet) {
         this._wb = workbook;
         this.sheet = sheet;
     }
+
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return this.sheet.getSheetName();
     }
+
+    /**
+     * Gets sheet.
+     *
+     * @return the sheet
+     */
     public Sheet getSheet() {
         return this.sheet;
     }
 
-    // API 제공 메서드
+    /**
+     * Model to sheet.
+     *
+     * @param <T>   the type parameter
+     * @param model the model
+     */
+// API 제공 메서드
     public <T> void modelToSheet(List<T> model){
         modelToSheet(header -> false, model);
     }
+
+    /**
+     * Model to sheet.
+     *
+     * @param <T>            the type parameter
+     * @param excludedHeader the excluded header
+     * @param model          the model
+     */
     public <T> void modelToSheet(Predicate<String> excludedHeader, List<T> model) {
         if (Objects.isNull(model) || model.isEmpty()) {
             throw new DataListEmptyException("data list is empty exception");
@@ -50,9 +85,22 @@ public class ExcelSheet {
         IntStream.rangeClosed(dataRow, modelSize)
                 .forEach(rowIndex -> dataWrite(columnFrames, rowIndex, model.get(rowIndex - 1)));
     }
+
+    /**
+     * Multi model to sheet.
+     *
+     * @param modelLists the model lists
+     */
     public void multiModelToSheet(List<?>... modelLists) {
         multiModelToSheet(s -> false, modelLists);
     }
+
+    /**
+     * Multi model to sheet.
+     *
+     * @param excludedHeader the excluded header
+     * @param modelLists     the model lists
+     */
     public void multiModelToSheet(Predicate<String> excludedHeader, List<?>... modelLists) {
         for (List<?> modelList : modelLists) {
             if (Objects.isNull(modelList)) {
@@ -71,6 +119,14 @@ public class ExcelSheet {
         IntStream.rangeClosed(dataRow, multiModelSize)
                 .forEach(rowIndex -> multiModelDataWrite(multiColumnFrames, rowIndex, multiModel.get(rowIndex - 1)));
     }
+
+    /**
+     * Sheet to model list.
+     *
+     * @param <T>   the type parameter
+     * @param clazz the clazz
+     * @return the list
+     */
     public <T> List<T> sheetToModel(Class<T> clazz) {
         ModelMapper modelMapper = ModelMapperFactory.defaultModelMapper(); // Model Mapper 가져오기
 
@@ -90,7 +146,6 @@ public class ExcelSheet {
     }
 
 
-    // 내부에서 사용하는 메서드
     private void add(List<ColumnFrame> columnFrames, List<ColumnFrame> newList,Cell cell) {
         for (ColumnFrame frame : columnFrames) {
             if (frame.getImportNameOptions().contains(CellUtils.getValue(cell).toString().trim())) {
@@ -122,7 +177,6 @@ public class ExcelSheet {
                 .forEach(setStyle);
     }
 
-    // export용 다중 model
     private List<Object[]> convertMultiModel(List<?>[] modelLists) {
         Arrays.sort(modelLists, (o1, o2) -> o2.size() - o1.size());
         int maxModelSize = modelLists[0].size();
@@ -148,7 +202,6 @@ public class ExcelSheet {
                 .collect(Collectors.toList());
     }
 
-    // Import용
     private Map<String, Object> createModelMap(List<ColumnFrame> columnFrames, int rowIndex) {
         return columnFrames.stream()
                 .filter(ColumnFrame :: isExistColumn)
@@ -172,7 +225,6 @@ public class ExcelSheet {
         return newList;
     }
 
-    // 공통
     private List<ColumnFrame> createColumnFrames(Predicate<String> excludedHeader, List<ClassModel> classModels) {
         return createColumnFrames(classModels, frame -> frame.setSheetStyle(this.sheet))
                 .filter(columnFrame -> excludedHeader

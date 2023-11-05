@@ -9,14 +9,32 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Reflection utils.
+ */
 public final class ReflectionUtils {
 
     private ReflectionUtils() {
         throw new IllegalStateException("Utility class");
     }
+
+    /**
+     * Gets declared fields.
+     *
+     * @param type the type
+     * @return the declared fields
+     */
     public static List<Field> getDeclaredFields(Class<?> type) {
         return Arrays.stream(type.getDeclaredFields()).collect(Collectors.toList());
     }
+
+    /**
+     * Gets instance.
+     *
+     * @param <T>   the type parameter
+     * @param clazz the clazz
+     * @return the instance
+     */
     public static <T> T getInstance(Class<T> clazz) {
         try {
             Constructor<?> constructor = clazz.getDeclaredConstructor();
